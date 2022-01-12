@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mypro.mapper.multi.IUserMapper">
+
+
+    <resultMap id="orderMap" type="com.mypro.pojo.Order">
+        <result property="id"         column="id"></result>
+        <result property="orderTime"  column="orderTime"></result>
+        <result property="total"      column="total"></result>
+        <result property="order_name" column="order_name"></result>
+        <result property="id_user"    column="id_user"></result>
+
+        <association property="user" javaType="com.mypro.pojo.User">
+            <result property="id" column="id_user"></result>
+            <result property="Name" column="Name"></result>
+            <result property="Psw" column="Psw"></result>
+        </association>
+
+    </resultMap>
+
+    <!--resultMap：手动来配置实体属性与表字段属性的映射关系-->
+    <select id="findOrder" resultMap="orderMap">
+        select * from user u,`order` o where u.id=o.id_user
+    </select>
+
+
+
+</mapper>
